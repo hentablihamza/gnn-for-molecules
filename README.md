@@ -188,55 +188,6 @@ splits with the same code.
 > Graph/Property Mapping." *J. Chem. Inf. Comput. Sci.* **1995**, *35* (2),
 > 175-180. DOI: [10.1021/ci00024a001](https://doi.org/10.1021/ci00024a001)
 
-ChemNet was **among the first** neural networks to map a molecular graph
-*directly* into the architecture of the network, instead of first compressing the
-molecule into a fixed vector of descriptors. Each non-hydrogen atom had its own
-neuron, and the connection weights between neurons were tied to the
-**topological distance** between the atoms they joined: every pair of atoms two
-bonds apart shared one weight, every pair three bonds apart shared another.
-
-That is weight sharing over graph structure, which is the central idea modern
-graph convolution rests on — written down in 1995.
-
-**On priority, carefully.** The University of Missouri Chemistry department's
-page for Prof. Kireev describes ChemNet as *"the first published instance of a
-graph-convolutional network architecture"*
-([chemistry.missouri.edu/people/kireev](https://chemistry.missouri.edu/people/kireev));
-that claim is theirs and is attributed to them here rather than asserted as
-fact. Kireev himself has been more cautious in public, writing in 2025 that it
-*"might have been among the first"*, and describing how in a single layer
-messages were passed to a node from all other nodes, in a Transformer-like
-fashion. This repository follows his framing.
-
-ChemNet was also not alone. Two contemporaneous architectures built the network
-from the molecular graph in related ways:
-
-* **Baskin, I. I.; Palyulin, V. A.; Zefirov, N. S.** "A Neural Device for
-  Searching Direct Correlations between Structures and Properties of Chemical
-  Compounds." *J. Chem. Inf. Comput. Sci.* **1997**, *37* (4), 715-721.
-  DOI: [10.1021/ci940128y](https://doi.org/10.1021/ci940128y)
-* **Ivanciuc, O.** — **MolNet**, a multilayer perceptron whose input-hidden
-  connections encode the topological distance matrix and whose hidden-output
-  connections are grouped by atom type. Reviewed in "Quantitative
-  Structure-Activity Relationships (QSAR) with the MolNet Molecular Graph
-  Machine." *Curr. Comput.-Aided Drug Des.* **2011**, *6* (2), 261-268.
-  DOI: [10.2174/1574893611106020261](https://doi.org/10.2174/1574893611106020261)
-
-Ivanciuc's review chapter "Molecular Graph Descriptors Used in Neural Network
-Models" (in *Topological Indices and Related Descriptors in QSAR and QSPR*,
-Devillers, J.; Balaban, A. T., Eds.; Gordon & Breach, 1999, pp. 697-777)
-discusses all three together as networks generated from the molecular graph.
-
-[Notebook 9](notebooks/09_chemnet_1995_lineage.ipynb) does not just describe
-ChemNet, it **rebuilds the idea in code** (`mgnn/chemnet.py`): a layer in which
-every atom is updated from every other atom at once, with one learned weight
-matrix per topological-distance shell. The notebook shows that
-
-* a one-hop GCN layer is the special case where every weight past $d = 1$ is
-  zero, and
-* one ChemNet layer reaches the whole molecule, where a GCN layer reaches one
-  bond — so the "attend to all atoms, biased by graph distance" pattern that
-  graph transformers arrived at in the 2020s is close to where this started.
 
 ### Acknowledgement
 
