@@ -1,0 +1,31 @@
+# caches and build artefacts
+__pycache__/
+*.py[cod]
+*.egg-info/
+build/
+dist/
+.pytest_cache/
+.ruff_cache/
+.ipynb_checkpoints/
+
+# featurisation cache written by mgnn.data.load_tox21_graphs
+data/cache/
+
+# trained weights and run outputs
+*.pt
+*.ckpt
+runs/
+
+# environments
+.venv/
+venv/
+env/
+
+# editors / OS
+.vscode/
+.idea/
+.DS_Store
+
+# packaging metadata
+*.egg-info
+.eggs/

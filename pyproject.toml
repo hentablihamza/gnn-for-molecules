@@ -1,0 +1,65 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "mgnn"
+version = "0.1.0"
+description = "Graph neural networks on molecules, explained from scratch: graph convolution, message passing, and Tox21 toxicity prediction"
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+authors = [{ name = "Hentabli Hamza" }]
+keywords = [
+    "graph-neural-networks", "cheminformatics", "rdkit", "molecular-property-prediction",
+    "message-passing", "graph-convolution", "tox21", "toxicity", "drug-discovery",
+    "pytorch-geometric", "chemnet",
+]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Topic :: Scientific/Engineering :: Chemistry",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+]
+dependencies = [
+    "torch>=2.2",
+    "torch-geometric>=2.5",
+    "rdkit>=2023.9",
+    "numpy>=1.24",
+    "pandas>=2.0",
+    "scikit-learn>=1.3",
+    "matplotlib>=3.7",
+    "pillow>=10.0",
+    "tqdm>=4.66",
+]
+
+[project.optional-dependencies]
+notebooks = ["jupyter>=1.0", "nbconvert>=7.10", "ipykernel>=6.29"]
+dev = ["pytest>=8.0", "ruff>=0.6"]
+
+[project.urls]
+Homepage = "https://github.com/hentablihamza/gnn-for-molecules"
+Issues = "https://github.com/hentablihamza/gnn-for-molecules/issues"
+
+[tool.setuptools.packages.find]
+include = ["mgnn*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q --strict-markers"
+filterwarnings = ["ignore::DeprecationWarning"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"
+exclude = ["notebooks/*.ipynb"]
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "UP", "B", "C4"]
+ignore = ["E501", "B008"]
+
+[tool.ruff.lint.per-file-ignores]
+"tests/*" = ["E402"]
